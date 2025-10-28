@@ -130,8 +130,7 @@ final class LoginViewController: UIViewController {
     @objc private func onClickLoginButton() {
         guard let isValidEmail = emailTextField.textField.text?.isValidEmail() else { return }
         guard let isValidPassword = passwordTextField.textField.text?.isValidPassword() else { return }
-        Log.d(isValidEmail)
-        Log.d(isValidPassword)
+        
         if isValidEmail && isValidPassword {
             let welcomeViewController = WelcomeViewController()
             welcomeViewController.configure(id: emailTextField.textField.text, resetLoginViewController: { [weak self] in
