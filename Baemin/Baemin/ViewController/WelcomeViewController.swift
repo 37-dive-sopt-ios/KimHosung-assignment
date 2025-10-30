@@ -31,7 +31,7 @@ final class WelcomeViewController: UIViewController {
     lazy var navigationTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "대체 뼈짐 누가 시켰어??"
-        label.font = .pretendard(.semiBold, size: 18)
+        label.font = .pretendard(.title_sb_18)
         return label
     }()
     
@@ -53,14 +53,14 @@ final class WelcomeViewController: UIViewController {
     lazy var mainWelcomeLabel: UILabel = {
         let label = UILabel()
         label.text = "환영합니다"
-        label.font = .pretendard(.bold, size: 24)
+        label.font = .pretendard(.head_b_24)
         return label
     }()
     
     lazy var subWelcomeLabel: UILabel = {
         let label = UILabel()
         label.text = "\(id ?? "")님 반가워요!"
-        label.font = .pretendard(.semiBold, size: 18)
+        label.font = .pretendard(.title_sb_18)
         return label
     }()
     
@@ -70,7 +70,7 @@ final class WelcomeViewController: UIViewController {
         button.setTitleColor(.baeminWhite, for: .normal)
         button.setTitle("뒤로가기", for: .normal)
         button.layer.cornerRadius = 4
-        button.titleLabel?.font = .pretendard(.bold, size: 18)
+        button.titleLabel?.font = .pretendard(.head_b_18)
         button.addTarget(self, action: #selector(onClickBackButton), for: .touchUpInside)
         return button
     }()

@@ -27,7 +27,7 @@ final class LoginViewController: UIViewController {
     lazy var navigationTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "이메일 또는 아이디로 계속"
-        label.font = .pretendard(.semiBold, size: 18)
+        label.font = .pretendard(.title_sb_18)
         return label
     }()
     
@@ -91,7 +91,7 @@ final class LoginViewController: UIViewController {
         button.setTitleColor(.baeminWhite, for: .normal)
         button.setTitle("로그인", for: .normal)
         button.layer.cornerRadius = 4
-        button.titleLabel?.font = .pretendard(.bold, size: 18)
+        button.titleLabel?.font = .pretendard(.head_b_18)
         button.addTarget(self, action: #selector(onClickLoginButton), for: .touchUpInside)
         return button
     }()
@@ -101,7 +101,7 @@ final class LoginViewController: UIViewController {
         var configuration = UIButton.Configuration.plain()
         
         configuration.attributedTitle = AttributedString("계정 찾기", attributes: AttributeContainer([
-            .font: UIFont.pretendard(.regular, size: 14)
+            .font: UIFont.pretendard(.body_r_14)
         ]))
         configuration.image = UIImage(resource: .chevronRight)
         configuration.imagePlacement = .trailing
@@ -118,7 +118,7 @@ final class LoginViewController: UIViewController {
     lazy var findAccountLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.font = .pretendard(.regular, size: 14)
+        label.font = .pretendard(.body_r_14)
         return label
     }()
     

@@ -11,8 +11,8 @@ import UIKit
 
 final class AnimatedTextField: UIView {
     
-    var font: UIFont? = .pretendard(.regular, size: 14)
-    var animatedPlaceholderFont: UIFont? = .pretendard(.regular, size: 10)
+    var font: UIFont? = .pretendard(.body_r_14)
+    var animatedPlaceholderFont: UIFont? = .pretendard(.caption_r_10)
     var textColor: UIColor = .baeminBlack
     var placeholderColor: UIColor = .baeminGray700
     var placeholder: String?

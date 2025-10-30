@@ -18,7 +18,7 @@ class FindAccountViewController: UIViewController {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "이메일을 입력해주세요"
-        label.font = .pretendard(.semiBold, size: 18)
+        label.font = .pretendard(.title_sb_18)
         return label
     }()
     
@@ -46,7 +46,7 @@ class FindAccountViewController: UIViewController {
         button.setTitleColor(.baeminWhite, for: .normal)
         button.setTitle("확인", for: .normal)
         button.layer.cornerRadius = 4
-        button.titleLabel?.font = .pretendard(.bold, size: 18)
+        button.titleLabel?.font = .pretendard(.head_b_18)
         button.addTarget(self, action: #selector(onClickOkButton), for: .touchUpInside)
         return button
     }()
