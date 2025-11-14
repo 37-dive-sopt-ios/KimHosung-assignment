@@ -10,7 +10,7 @@ import os
 
 public final class Log {
     
-    private static let subsystem: String = Bundle.main.bundleIdentifier ?? "com.ccl.collaborativecomputinglab"
+    private static let subsystem: String = Bundle.main.bundleIdentifier ?? "com.hosungkim.baemin"
     private static let logger: Logger = Logger(subsystem: subsystem, category: "Log")
     
     private static let enabled: Bool = true

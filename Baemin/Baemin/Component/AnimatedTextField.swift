@@ -11,6 +11,7 @@ import UIKit
 
 final class AnimatedTextField: UIView {
     
+    // MARK: - Property
     var font: UIFont? = .pretendard(.body_r_14)
     var animatedPlaceholderFont: UIFont? = .pretendard(.caption_r_10)
     var textColor: UIColor = .baeminBlack
@@ -18,7 +19,7 @@ final class AnimatedTextField: UIView {
     var placeholder: String?
     var animatedPlaceholder: String?
     
-    lazy var animatedPlaceholderLabel: PaddingLabel = {
+    let animatedPlaceholderLabel: PaddingLabel = {
         let label = PaddingLabel()
         label.text = ""
         label.textColor = .secondaryLabel
@@ -26,17 +27,23 @@ final class AnimatedTextField: UIView {
         return label
     }()
     
-    lazy var textField: UITextField = {
+    let textField: UITextField = {
         let textField = UITextField()
-        textField.addTarget(self, action: #selector(editingChangedTextField), for: .editingChanged)
+        textField.addLeftPadding(10)
+        textField.layer.borderColor = UIColor.baeminGray200.cgColor
+        textField.layer.borderWidth = 1
+        textField.layer.cornerRadius = 4
         return textField
     }()
     
+    // MARK: - Basic
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(textField)
-        addSubview(animatedPlaceholderLabel)
+        addSubviews(
+            textField,
+            animatedPlaceholderLabel,
+        )
         
         textField.snp.makeConstraints({
             $0.edges.equalToSuperview()
@@ -46,9 +53,6 @@ final class AnimatedTextField: UIView {
             $0.centerY.equalToSuperview()
         })
         
-        bringSubviewToFront(animatedPlaceholderLabel)
-        
-        textField.addLeftPadding(10)
         textField.font = font
         textField.textColor = textColor
         
@@ -56,17 +60,37 @@ final class AnimatedTextField: UIView {
         animatedPlaceholderLabel.textColor = placeholderColor
         animatedPlaceholderLabel.text = animatedPlaceholder
         
-        textField.layer.borderColor = UIColor.baeminGray200.cgColor
-        textField.layer.borderWidth = 1
-        textField.layer.cornerRadius = 4
+        textField.addTarget(self, action: #selector(editingChangedTextField), for: .editingChanged)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Configure
     func configure(placeholder: String, animatedPlaceholder: String) {
         self.placeholder = placeholder
         self.animatedPlaceholder = animatedPlaceholder
         animatedPlaceholderLabel.text = animatedPlaceholder
     }
     
+    // MARK: - Component Action
+    @objc private func editingChangedTextField() {
+        let hasText: Bool = !(textField.text?.isEmpty ?? true)
+        textField.rightView?.isHidden = !hasText
+    }
+    
+    @objc private func onClickCancelButton() {
+        textField.text = nil
+        setFocused(false)
+    }
+    
+    @objc private func onClickSecurityButton(_ sender: UIButton) {
+        textField.isSecureTextEntry = sender.isSelected
+        sender.isSelected.toggle()
+    }
+    
+    // MARK: - Global Function
     func addSecurityButton() {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -92,30 +116,13 @@ final class AnimatedTextField: UIView {
             $0.size.equalTo(20)
         })
         
-        stackView.addArrangedSubview(cancelButton)
-        stackView.addArrangedSubview(securityButton)
+        stackView.addArrangedSubviews(
+            cancelButton,
+            securityButton,
+        )
         
         textField.rightView = stackView
         textField.rightViewMode = .always
-    }
-    
-    @objc private func editingChangedTextField() {
-        let hasText: Bool = !(textField.text?.isEmpty ?? true)
-        textField.rightView?.isHidden = !hasText
-    }
-    
-    @objc private func onClickCancelButton() {
-        textField.text = nil
-        setFocused(false)
-    }
-    
-    @objc private func onClickSecurityButton(_ sender: UIButton) {
-        textField.isSecureTextEntry = sender.isSelected
-        sender.isSelected.toggle()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func setFocused(_ isFocused: Bool) {
