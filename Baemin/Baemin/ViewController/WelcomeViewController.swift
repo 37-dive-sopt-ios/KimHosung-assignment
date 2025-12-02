@@ -47,6 +47,6 @@ final class WelcomeViewController: UIViewController {
     @objc private func onClickMainButton() {
         resetLoginViewController?()
         guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
-        sceneDelegate.replaceRootViewController(with: BaseViewController())
+        sceneDelegate.replaceRootViewController(with: ContainerViewController())
     }
 }
