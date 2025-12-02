@@ -6,8 +6,20 @@
 //
 
 import UIKit
+import Combine
 
 extension UITextField {
+    
+    var textPublisher: AnyPublisher<String?, Never> {
+        NotificationCenter.default
+            .publisher(for: UITextField.textDidChangeNotification, object: self)
+            .map({ output in
+                let textField = output.object as? UITextField
+                return textField?.text
+            })
+            .eraseToAnyPublisher()
+    }
+    
     func addLeftPadding(_ padding: CGFloat) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
         leftView = paddingView
